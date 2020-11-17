@@ -66,6 +66,11 @@ export default class Decoder {
 				if (this.checkIfIsDecoded(references, token)) return;
 				chance++;
 			}
+
+			// 4. last stand, pick randomly among the last references
+			token.decodedTo = references(
+				pickRandomlyWithConstraints(0, references.length - 1)
+			);
 		});
 	}
 
