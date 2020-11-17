@@ -48,6 +48,8 @@ export default class Decoder {
 
 	decode() {
 		this.value.forEach((token) => {
+			if (token.value.length <= 3) return;
+
 			let references = [];
 
 			// 1. first round
@@ -68,9 +70,10 @@ export default class Decoder {
 			}
 
 			// 4. last stand, pick randomly among the last references
-			token.decodedTo = references(
-				pickRandomlyWithConstraints(0, references.length - 1)
-			);
+			const random =
+				references[pickRandomlyWithConstraints(0, references.length - 1)];
+			console.log(random);
+			token.decodedTo = random;
 		});
 	}
 
