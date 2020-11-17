@@ -1,10 +1,10 @@
-import Header from '../Header';
+import Header from './Header';
 import TextAreaWithButton from './TextAreaWithButton';
 import TextAreaReadOnly from './TextAreaReadOnly';
-import List from './list';
+import List from './List';
 
-import CustomString from '../../utils/custom_string';
-import Encoder from './encoder';
+import CustomString from '../utils/custom_string';
+import Encoder from '../features/encoder/encoder';
 
 import { useState } from 'react';
 
@@ -31,12 +31,12 @@ const BusinessBlock = ({ title, actionLabel }) => {
 		encoder.coreShuffle();
 
 		const encoded = encoder.getOutput();
-		console.log(encoded);
+		setOutput((prevOutput) => encoded);
 
 		const listOfShuffled = encoder.retrieveOriginalFromShuffled();
-		setList(listOfShuffled);
+		setList((prevList) => listOfShuffled);
 
-		// clearTextHandler();
+		clearTextHandler();
 	}
 
 	return (
