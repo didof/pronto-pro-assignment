@@ -76,8 +76,10 @@ export default class Encoder {
 	}
 
 	retrieveOriginalFromShuffled() {
-		return this.value.filter((token) => {
-			return 'shuffled' in token;
-		});
+		return this.value
+			.filter((token) => {
+				return 'shuffled' in token;
+			})
+			.map((token) => token.value);
 	}
 }

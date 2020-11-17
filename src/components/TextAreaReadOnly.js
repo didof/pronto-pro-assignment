@@ -1,5 +1,10 @@
-const TextAreaReadOnly = ({ value }) => {
-	return <textarea readOnly value={value} />;
+const TextAreaReadOnly = ({ value, children }) => {
+	return (
+		<div>
+			<textarea readOnly value={value} />
+			{children}
+		</div>
+	);
 };
 
 export default TextAreaReadOnly;

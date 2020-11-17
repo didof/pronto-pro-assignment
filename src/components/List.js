@@ -2,7 +2,7 @@ const List = ({ values }) => {
 	return (
 		<ul>
 			{values.map((el) => {
-				return <li key={`${Math.random()}-${el.shuffled}`}>{el.value}</li>;
+				return <li key={`${Math.random()}-${el}`}>{el}</li>;
 			})}
 		</ul>
 	);
