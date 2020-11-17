@@ -1,7 +1,10 @@
+// TODO change shuffled in encoded
+
 export default class Token {
 	value;
 	specials;
 	shuffled;
+	decoded;
 	constructor(value, specials) {
 		this.value = value;
 		this.specials = specials;
@@ -59,7 +62,9 @@ export default class Token {
 	}
 
 	get version() {
-		if ('shuffled' in this) {
+		if ('decoded' in this) {
+			return this.decoded;
+		} else if ('shuffled' in this) {
 			return this.shuffled;
 		} else {
 			return this.value;
@@ -75,5 +80,9 @@ export default class Token {
 		console.log(left);
 
 		return left;
+	}
+
+	set decodedTo(input) {
+		this.decoded = input;
 	}
 }

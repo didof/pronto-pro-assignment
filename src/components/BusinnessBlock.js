@@ -19,7 +19,7 @@ const BusinessBlock = ({ title, actionLabel }) => {
 	const [output, setOutput] = useState('');
 	const [list, setList] = useState([]);
 
-	const [decoderOutput, setDecoderOutput] = useState('');
+	const [decodedOutput, setDecodedOutput] = useState('');
 
 	function clearTextHandler() {
 		setText((prevText) => defaultValue);
@@ -31,23 +31,24 @@ const BusinessBlock = ({ title, actionLabel }) => {
 
 	function primaryActionHandler() {
 		const encoder = new Encoder(text);
-		encoder.coreShuffle();
+		encoder.encode();
 
 		const encoded = encoder.getOutput();
 		setOutput((prevOutput) => encoded);
 
 		const list = encoder.retrieveOriginalFromShuffled();
-		console.log(list);
 		setList((prevList) => list);
 	}
 
 	function secondaryActionHandler() {
 		const decoder = Decoder.withCheck(output, list);
-		// if (decoder.isNotValid) {
-		// 	console.error('is not valid');
-		// 	return;
-		// }
-		console.log(decoder);
+		if (decoder.isNotValid) {
+			console.error('is not valid');
+			return;
+		}
+		decoder.decode();
+		const decoded = decoder.getOutput();
+		setDecodedOutput((prevDecoded) => decoded);
 	}
 
 	return (
@@ -72,7 +73,7 @@ const BusinessBlock = ({ title, actionLabel }) => {
 
 			<Header size={3}>Output</Header>
 			<Header size={4}>Dencoded text</Header>
-			<TextAreaReadOnly value={decoderOutput}>
+			<TextAreaReadOnly value={decodedOutput}>
 				<DecodeButton action={secondaryActionHandler} />
 			</TextAreaReadOnly>
 		</div>
